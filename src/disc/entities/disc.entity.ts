@@ -8,6 +8,9 @@ export class Disc {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ length: 200 })
+  bookId: string;
+
   @Column({ length: 100 })
   heading: string;
 
