@@ -7,7 +7,7 @@ import { UseGuards } from '@nestjs/common';
 import { CurrentUser } from '../common/current-user.decorator'; // Importera den anpassade dekoratören
 
 //Controller för CRUD för rounten /disc
-@Controller('blog')
+@Controller('review')
 export class DiscController {
   constructor(private readonly discService: DiscService) { }
 
