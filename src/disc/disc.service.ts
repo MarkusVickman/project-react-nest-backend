@@ -50,11 +50,11 @@ export class DiscService {
   //Metod för att hämta alla discar
   async findAll(): Promise<Disc[]> {
 
-  // Hämta object från databasen och inkludera användarnamn
-  const response = await this.discRepository.createQueryBuilder('disc')
-    .leftJoinAndSelect('disc.user', 'user', 'user.email = disc.email') // Specificera join-villkor
-    .select(['disc.id as id', 'disc.heading as heading', 'disc.date as date', 'disc.about as about', 'disc.email as email', 'user.name as name']) // Välj nödvändiga fält
-    .getRawMany();
+    const response = await this.discRepository.createQueryBuilder('disc')
+      .leftJoinAndSelect('disc.user', 'user', 'user.email = disc.email') // Specificera join-villkor
+      .addSelect('user.name', 'name') // Lägg till user.name med alias 'name'
+      .getMany(); // Använd getMany istället för getRawMany
+
 
     //Hämtar object från databasen
     //let response = await this.discRepository.find();
@@ -105,7 +105,7 @@ export class DiscService {
     // Hämta användaren baserat på e-postadress
     const disc = await this.discRepository.findOne({ where: { id } });
 
-    if(disc.email !== user.email && user.isAdmin === false) {
+    if (disc.email !== user.email && user.isAdmin === false) {
       throw new ForbiddenException('Permission denied! wrong email');
     }
 
