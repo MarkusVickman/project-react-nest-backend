@@ -4,6 +4,6 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return '<h1>Välkommen till Discgolf-grossistens API. Testa endpoint /disc med Get istället för att läsa ut vårat lager av discar.<h1>';
+    return '<h1>Välkommen till Easy Book Review API. Testa endpoint /review med Get istället för att läsa ut alla recensioner.<h1>';
   }
 }
