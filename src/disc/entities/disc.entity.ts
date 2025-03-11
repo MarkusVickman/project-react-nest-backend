@@ -23,10 +23,10 @@ export class Disc {
   @Column()
   score: number;
 
-  @Column()
+  @Column({ default: 0 })
   likes: number;
 
-  @Column()
+  @Column({ default: 0 })
   views: number;
 
   @Column({ length: 255 }) // Kolumn som lagrar e-postadressen
