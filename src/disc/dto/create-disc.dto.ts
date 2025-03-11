@@ -23,7 +23,7 @@ export class CreateDiscDto {
 
     @IsInt()
     @IsNotEmpty()
-    @Min(1) 
+    @Min(0) 
     @Max(5) 
     score: number;
 
