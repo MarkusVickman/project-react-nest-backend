@@ -33,6 +33,7 @@ export class DiscService {
     const disc = this.discRepository.create({
       heading: discDto.heading,
       about: discDto.about,
+      bookId: discDto.bookId,
       email: user.email,
     });
 
