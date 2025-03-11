@@ -14,8 +14,8 @@ export class Disc {
   @Column({ length: 100 })
   heading: string;
 
-  @Column({ default: () => 'CURRENT_TIMESTAMP' })
-  date: Date;
+  @Column({ type: 'date', default: () => 'CURRENT_DATE' })
+  date: string;  
 
   @Column({ length: 10000, nullable: true  })
   about: string;
