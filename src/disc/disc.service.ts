@@ -34,6 +34,7 @@ export class DiscService {
       heading: discDto.heading,
       about: discDto.about,
       bookId: discDto.bookId,
+      score: discDto.score,
       email: user.email,
     });
 
