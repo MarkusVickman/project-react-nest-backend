@@ -117,4 +117,21 @@ export class DiscService {
     this.discRepository.delete(id);
     return `Delete ${id} completed`;
   }
+
+  //Metod för att hitta och ta bort en disc med dess id
+  async like(id: number, @CurrentUser() user): Promise<Disc> {
+    //Uppdaterar ett objekt 
+    const response = await this.discRepository.findOne({ where: { id } });
+
+    if (response.email !== user.email && user.isAdmin === false) {
+      throw new ForbiddenException('Permission denied! wrong email');
+    }
+
+     // Öka likes med 1
+     response.likes = (response.likes || 0) + 1;
+
+    //Vid fel skickas ett felmeddelande som svar istället
+    if (!response) { throw new NotFoundException('PUT: Update failed.'); }
+    return await this.discRepository.save(response);
+  }
 }

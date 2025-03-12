@@ -53,4 +53,12 @@ export class DiscController {
   remove(@Param('id') id: string, @Request() req) {
     return this.discService.remove(+id, req.user);
   }
+
+  // Like en review
+  @UseGuards(AuthGuard)
+  @UseInterceptors(ClassSerializerInterceptor)
+  @Put('like/:id')
+  like(@Param('id') id: string, @Request() req) {
+    return this.discService.like(+id, req.user);
+  }
 }
