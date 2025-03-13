@@ -32,6 +32,7 @@ export class DiscService {
     // Skapa och spara den nya Disc-posten
     const disc = this.discRepository.create({
       heading: discDto.heading,
+      subTitle: discDto.subTitle,
       about: discDto.about,
       bookId: discDto.bookId,
       score: discDto.score,
