@@ -17,6 +17,11 @@ export class CreateDiscDto {
     heading: string;
 
     @IsString()
+    @Length(1, 200)
+    @IsNotEmpty()
+    subtitle: string;
+
+    @IsString()
     @Length(5, 10000)
     @IsNotEmpty()
     about: string;

@@ -14,6 +14,9 @@ export class Disc {
   @Column({ length: 100 })
   heading: string;
 
+  @Column({ length: 200 })
+  subTitle: string;
+
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   date: Date;
 
