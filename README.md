@@ -1,10 +1,10 @@
-# Nest.JS API - STORA DELAR AV DENNA README ÄR EJ AKTUELLA
-Denna backend API är tänkt att kunna användas av ett lager. I det här fallet är den anpassad för att lagerföra discgolf discar och hantera användare.
-Repot innehåller en Nest.Js backend med en CRUD api som ansluter till en MySql-databas. Apin är publicerad i en docker-container till Google Cloud Run.
-Här är ett exempel på hur en webbapplikation kan se ut som använder denna api [Webbapp DG-gross](https://dg-gross.netlify.app/) Denna webbapplikation går det att läsa mer om på följande repo [Repo DG-gross](https://github.com/Webbutvecklings-programmet/projekt---klient-applikation-MarkusVickman/blob/main/README.md)
+# Nest.JS API - Easy Book Review 
+Denna backend API för att hantera bokrecensioner innehållandes bokid från Google Books API.
+Repot innehåller en Nest.Js backend med en CRUD API som ansluter till en MariaDb-databas. Apin är publicerad i en docker-container till Google Cloud Run.
+Här är ett repo som visar hur en webbapplikation kopplad till denna backend kan vara konstruerad [Easy book reviews](https://github.com/MarkusVickman/projekt-react)
 
 ## Backend innehåller bland annat
-* Databasanslutning till mySQL
+* Databasanslutning till MySQL/MariaDb
 * ORM för att sköta databasförfrågningar
 * DTO med class-validator för att säkerställa data och datatype
 * ValidationPipe för felmeddelandehantering
@@ -14,43 +14,47 @@ Här är ett exempel på hur en webbapplikation kan se ut som använder denna ap
 * @useguard som skyddar routes
 
 ## Api ändpunkt
-Det tar ungefär 10 sekunder för första svaret och ändpunkten finns här: [Välkomstmeddelande](https://dg-gross-1050979898493.europe-north1.run.app/) | [Lagret av discar](https://dg-gross-1050979898493.europe-north1.run.app/disc) 
+Det tar ungefär 10 sekunder för första svaret och ändpunkten finns här: [Välkomstmeddelande](https://project-react-nest-backend-1050979898493.us-central1.run.app/) | [Lagret av discar](https://project-react-nest-backend-1050979898493.us-central1.run.app/review/) 
 
-## Dischantering
-Funktioner i detta api för att hantera ett lager av discgolf-discar har följande funktioner:
-* Hämta en disc
-* Hämta alla discar
-* Lägga till discar
-* Uppdatera information om disc
-* Ta bort discar
+## Reviewhantering
+Funktioner i detta api för att hantera bokrecensioner och inloggningar för detta med följande funktioner:
+* Hämta en recension
+* Hämta alla recensioner
+* Skapa recension
+* Redigera recension
+* Ta bort recension
+* Gilla recension
 
-### Dischantering Databastabell
-Discar lagras i en mySql-databas enligt tabellen nedan. 
-
-|                         | disc                                     |              |
-|-------------------------|------------------------------------------|--------------|
-|id                       |int autoincrement                         | PK           |
-|brand                    |varchar(100)                              |              |
-|model                    |varchar(100)                              |              |
-|version                  |varchar(100)                              |              |
-|plastic                  |varchar(100)                              |              |
-|amount                   |int                                       |              |
-|fly_stats                |varchar(20)                               |              |
-|about                    |varchar(10000)                            |              |
-|price                    |int                                       |              |
+### Review Databastabell
+Böcker lagras i en mySql-databas enligt tabellen nedan. 
 
 
-### Dischantering ändpunkter
+|                         | Review                                 |                  |
+|-------------------------|----------------------------------------|------------------|
+| id                      | int autoincrement                      | PK               |
+| bookId                  | varchar(200)                           |                  |
+| heading                 | varchar(100)                           |                  |
+| subTitle                | varchar(200)                           |                  |
+| date                    | datetime, default: CURRENT_TIMESTAMP   |                  |
+| about                   | varchar(10000), nullable               |                  |
+| score                   | int                                    |                  |
+| email                   | varchar(255)                           | FK → User(email) |
+
+
+### Reviewhantering ändpunkter
 När id krävs skickas det med som en html-parameter.
 Skyddade routes kräver att access_token skickas med som `Authorization`: `Bearer + access_token`.
 
 |Metod  |Ändpunkt           |Beskrivning                                                                 |
 |-------|-------------------|----------------------------------------------------------------------------|
-|GET    |/disc/             |Hämtar alla lagrade discar.                                                 |
-|GET    |/disc/:ID          |Hämtar en specifik disc med angivet ID.                                                         |
-|POST   |/disc/create/      |Lagrar en ny disc. Alla parametrar för tabellen behöver skickas med         |
-|PUT    |/disc/update/:ID   |Uppdaterar en disc med angivet ID. Skicka med de parametrar du vill ändra.  |
-|DELETE |/disc/delete/:ID   |Raderar en disc med angivet ID.                                             |
+|GET    |/review/           |Hämtar alla recensioner.                                                    |
+|GET    |/review/:ID        |Hämtar en specifik recension med angivet id.                                |
+|POST   |/review/create/    |Lagrar en ny recension.                                                     |
+|PUT    |/review/update/:ID |Uppdaterar en recension med angivet ID.                                     |
+|DELETE |/review/delete/:ID |Raderar en recension med angivet ID.                                        |
+|PUT    |/review/like/:ID   |Gillar en recension med angivet ID. Skicka endast med ID.                   |
+
+Vid ny recension eller uppdatering av befintlig är värden för score och about valfritt. 
 
 
 ## Användarhantering
