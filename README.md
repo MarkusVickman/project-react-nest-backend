@@ -14,7 +14,7 @@ Här är ett repo som visar hur en webbapplikation kopplad till denna backend ka
 * @useguard som skyddar routes
 
 ## Api ändpunkt
-Det tar ungefär 10 sekunder för första svaret och ändpunkten finns här: [Välkomstmeddelande](https://project-react-nest-backend-1050979898493.us-central1.run.app/) | [Lagret av discar](https://project-react-nest-backend-1050979898493.us-central1.run.app/review/) 
+Det tar ungefär 10 sekunder för första svaret och ändpunkten finns här: [Välkomstmeddelande](https://project-react-nest-backend-1050979898493.us-central1.run.app/) | [Alla recensioner](https://project-react-nest-backend-1050979898493.us-central1.run.app/review/) 
 
 ## Reviewhantering
 Funktioner i detta api för att hantera bokrecensioner och inloggningar för detta med följande funktioner:
